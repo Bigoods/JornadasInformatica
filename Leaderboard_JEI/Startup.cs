@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace Leaderboard_JEI
 {
+    //so pra testar
     public class Startup
     {
         public Startup(IConfiguration configuration)
