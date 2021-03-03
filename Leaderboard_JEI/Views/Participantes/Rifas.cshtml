@@ -1,0 +1,41 @@
+﻿@using System.Security.Claims;
+@model Leaderboard_JEI.Models.Perfil
+@{
+    ViewData["Title"] = "Rifas";
+}
+
+<h1>Rifas - O preço de cada rifa são de 10K's</h1>
+<form asp-action="Rifas">
+
+    <h2>Prémio 1</h2>
+    <h3>A</h3>
+    <a>Já comprou @Html.DisplayFor(model => model.Rifa1) rifas. </a>
+    <input type="number" name="primeiro" placeholder="Número de rifas" />
+
+    <h2>Prémio 2</h2>
+    <h3>B</h3>
+    <label>Já comprou @Html.DisplayFor(model => model.Rifa2) rifas. </label>
+    <input type="number" name="segundo" placeholder="Número de rifas" />
+
+    <h2>Prémio 3</h2>
+    <h3>C</h3>
+    <label>Já comprou @Html.DisplayFor(model => model.Rifa3) rifas. </label>
+    <input type="number" name="terceiro" placeholder="Número de rifas" />
+
+    <h2>Prémio 4</h2>
+    <h3>D</h3>
+    <label>Já comprou @Html.DisplayFor(model => model.Rifa4) rifas. </label>
+    <input type="number" name="quarto" placeholder="Número de rifas" />
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+
+            window.onload = function () {
+                alert("Não tem pontos suficientes!");
+            };
+        </script>
+
+    }
+    <input type="submit" />
+</form>
+

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Leaderboard_JEI.Models.Participante>
+
+@{
+    ViewData["Title"] = "Lista";
+}
+
+<h1>Lista</h1>
+
+<p>
+    <a asp-action="Listadiaria">Pontuação Diária</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Posição</label>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Num)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pontuacao)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int i = 0; } 
+@foreach (var item in Model)
+{
+        <tr>
+            @{ 
+               i = i + 1;
+            }
+            <td>
+                <label>@i</label>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Num)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pontuacao)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

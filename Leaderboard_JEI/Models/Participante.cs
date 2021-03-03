@@ -13,5 +13,7 @@ namespace Leaderboard_JEI.Models
         public int Num { get; set; }
         [Required]
         public int Pontuacao { get; set; }
+        [Required]
+        public int PontuacaoDiaria { get; set; }
     }
 }

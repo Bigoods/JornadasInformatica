@@ -1,0 +1,30 @@
+﻿@model Leaderboard_JEI.Models.Perfil
+@{
+    ViewData["Title"] = "Dar Pontos";
+}
+
+<h1>Gerir pontos ao pessoal</h1>
+<form asp-action="DarPontos">
+
+
+    
+    <input type="text" name="UserName" placeholder="Número de Aluno" />
+
+   
+    <input type="number" name="Add" placeholder="Adicionar K's" />
+
+    <input type="number" name="Remove" placeholder="Remover K's" />
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+
+            window.onload = function () {
+                alert("Algo correu mal");
+            };
+        </script>
+
+    }
+    <input type="submit" />
+</form>
+

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Leaderboard_JEI.Data;
+using Leaderboard_JEI.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,22 +25,25 @@ namespace Leaderboard_JEI.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _dbcontext;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext dbcontext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _dbcontext = dbcontext;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
-
+        
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
@@ -46,8 +51,19 @@ namespace Leaderboard_JEI.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [Display(Name = "Username")]
+            [Display(Name = "Número Aluno")]
             public string Username { get; set; }
+
+            [Display(Name = "Pontos")]
+            public int Pontos { get; set; } = 0;
+            [Display(Name = "Rifa1")]
+            public int Rifa1 { get; set; } = 0;
+            [Display(Name = "Rifa2")]
+            public int Rifa2 { get; set; } = 0;
+            [Display(Name = "Rifa3")]
+            public int Rifa3 { get; set; } = 0;
+            [Display(Name = "Rifa4")]
+            public int Rifa4 { get; set; } = 0;
 
             [Required]
             [EmailAddress]
@@ -83,7 +99,9 @@ namespace Leaderboard_JEI.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                    Perfil newPerfil = new Perfil { Pontos = Input.Pontos, Rifa1 = Input.Rifa1, Rifa2 = Input.Rifa2, Rifa3 = Input.Rifa3, Rifa4 = Input.Rifa4, Username = user.UserName };
+                    _dbcontext.Perfils.Add(newPerfil);
+                    await _dbcontext.SaveChangesAsync();
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

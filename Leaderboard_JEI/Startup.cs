@@ -63,7 +63,7 @@ namespace Leaderboard_JEI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Participantes}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

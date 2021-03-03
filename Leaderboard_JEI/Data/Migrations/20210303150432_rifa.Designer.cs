@@ -4,14 +4,16 @@ using Leaderboard_JEI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Leaderboard_JEI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210303150432_rifa")]
+    partial class rifa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,36 +40,6 @@ namespace Leaderboard_JEI.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Participante");
-                });
-
-            modelBuilder.Entity("Leaderboard_JEI.Models.Perfil", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Pontos")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rifa1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rifa2")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rifa3")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rifa4")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Perfils");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

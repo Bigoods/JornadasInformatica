@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "UploadCSV";
+}
+
+<h1>UploadCSV</h1>
+
+<div class="container">
+    <div class="row">
+        <section>
+            <form asp-action="Upload" enctype="multipart/form-data" >
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <p>Upload do ficheiro</p>
+                        <input type="file" name="file"  />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input type="submit" value="Upload" />
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>

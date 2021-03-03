@@ -1,4 +1,4 @@
-﻿@model Leaderboard_JEI.Models.Participante
+﻿@model Leaderboard_JEI.Models.Perfil
 
 @{
     ViewData["Title"] = "Details";
@@ -11,20 +11,19 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Num)
+            <label>Número</label>
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Num)
+            @Html.DisplayFor(model => model.Username)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pontuacao)
+            @Html.DisplayNameFor(model => model.Pontos)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pontuacao)
+            @Html.DisplayFor(model => model.Pontos)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="ListPerfis">Voltar</a>
 </div>
