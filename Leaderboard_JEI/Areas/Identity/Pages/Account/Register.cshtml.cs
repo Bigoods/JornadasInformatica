@@ -26,19 +26,22 @@ namespace Leaderboard_JEI.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _dbcontext;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ApplicationDbContext dbcontext)
+            ApplicationDbContext dbcontext,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _dbcontext = dbcontext;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -53,6 +56,8 @@ namespace Leaderboard_JEI.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Número Aluno")]
             public string Username { get; set; }
+            
+            public string Role { get; set; }
 
             [Display(Name = "Pontos")]
             public int Pontos { get; set; } = 0;
@@ -96,6 +101,10 @@ namespace Leaderboard_JEI.Areas.Identity.Pages.Account
             {
                 var user = new IdentityUser { UserName = Input.Username, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                if (user.UserName == "Admin")
+                    await _userManager.AddToRoleAsync(user, "Admin");
+                else
+                    await _userManager.AddToRoleAsync(user, "Client");
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

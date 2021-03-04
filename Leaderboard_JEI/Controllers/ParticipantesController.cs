@@ -41,12 +41,14 @@ namespace Leaderboard_JEI.Controllers
         {
             return View();
         }*/
+        [Authorize(Roles = "Admin")]
         public IActionResult Upload()
         {
             GetPontos();
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Upload(IFormFile file)
         {
             if (ModelState.IsValid)
@@ -148,13 +150,14 @@ namespace Leaderboard_JEI.Controllers
                 ViewBag.Pontos = perfil.Pontos;
             }
         }
-
+        [Authorize(Roles ="Admin")]
         public IActionResult DarPontos()
         {
             GetPontos();
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult DarPontos(string UserName, int Add, int Remove)
         {
             GetPontos();
@@ -176,17 +179,19 @@ namespace Leaderboard_JEI.Controllers
             }
             return RedirectToAction("Details", new { Numero=perfil.Username });
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Details(string Numero)
         {
             GetPontos();
             return View(_context.Perfils.FirstOrDefault(x => x.Username == Numero));
         }
-
+        [Authorize(Roles = "Admin, Client")]
         public IActionResult ListPerfis()
         {
             GetPontos();
             return View(_context.Perfils.OrderByDescending(x => x.Pontos).ToList());
         }
+        [Authorize(Roles = "Admin, Client")]
         public IActionResult ListRifas()
         {
             GetPontos();

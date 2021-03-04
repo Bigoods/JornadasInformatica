@@ -37,7 +37,7 @@
                             }
                         </li>
                         <li class="nav-item">
-                            @if (User.Identity.Name == "Admin")
+                            @if (User.Identity.IsAuthenticated)
                             {
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Participantes" asp-action="ListRifas">Lista de Rifas</a>
                             }
@@ -76,3 +76,9 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+<style>
+
+    footer {
+        margin-top: auto;
+    }
+</style>
