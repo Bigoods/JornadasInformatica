@@ -191,11 +191,11 @@ namespace Leaderboard_JEI.Controllers
             GetPontos();
             return View(_context.Perfils.OrderByDescending(x => x.Pontos).ToList());
         }
-        [Authorize(Roles = "Admin, Client")]
+        [Authorize(Roles = "Admin")]
         public IActionResult ListRifas()
         {
             GetPontos();
-            return View(_context.Perfils.OrderByDescending(x => x.Pontos).ToList());
+            return View(_context.Perfils.OrderBy(x=>x.Username).ToList());
         }
 
         /*public async Task<IActionResult> UploadCSVAsync(List<IFormFile> arquivos)

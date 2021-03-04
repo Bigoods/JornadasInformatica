@@ -5,16 +5,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/ico" href="/Images/jei.png" />
+    <link rel="icon" type="image/ico" href="/Images/jei.png" />
+    <link rel="apple-touch-icon" type="image/ico" href="/Images/jei.png" />
     <title>@ViewData["Title"] - Leaderboard_JEI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site _dark.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Participantes" asp-action="Index">Leaderboard_JEI</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Participantes" asp-action="Index"><img src="~/Images/neei.png" style="object-fit: cover; max-width:100px;"/></a>
+                <button class="navbar-toggler " type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -22,38 +25,41 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Participantes" asp-action="Lista">Pontuações</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Participantes" asp-action="Lista">Pontuações</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link text-white" asp-area="" asp-controller="Participantes" asp-action="ListPerfis">Pontuação da Noite</a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link text-white" asp-area="" asp-controller="Participantes" asp-action="Rifas">Comprar Rifas</a>
+                            }
                         </li>
                         <li class="nav-item">
                             @if (User.Identity.Name == "Admin")
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Participantes" asp-action="Upload">Upload</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Participantes" asp-action="ListRifas">Lista de Rifas</a>
                             }
                         </li>
                         <li class="nav-item">
                             @if (User.Identity.Name == "Admin")
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Participantes" asp-action="DarPontos">Gerir Pontos</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Participantes" asp-action="Upload">Upload</a>
                             }
                         </li>
                         <li class="nav-item">
-                            @if (User.Identity.IsAuthenticated)
+                            @if (User.Identity.Name == "Admin")
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Participantes" asp-action="ListRifas">Lista de Rifas</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Participantes" asp-action="DarPontos">Gerir Pontos</a>
                             }
                         </li>
-                        <li class="nav-item">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Participantes" asp-action="Rifas">Rifas</a>
-                            }
-                        </li>
-                        <li class="nav-item">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Participantes" asp-action="ListPerfis">Pontuação da Noite</a>
-                            }
-                        </li>
+
+
+
                     </ul>
                 </div>
             </div>
@@ -65,11 +71,11 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @*<footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - Jornadas de Engenharia Informática
         </div>
-    </footer>
+    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

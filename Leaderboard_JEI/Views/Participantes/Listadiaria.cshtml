@@ -4,14 +4,14 @@
     ViewData["Title"] = "Lista";
 }
 
-<h1>Lista</h1>
+<h1>Lista de Coins Diários</h1>
 
 <p>
-    <a asp-action="Lista">Pontuação Geral</a>
+    <a asp-action="Lista" class="btn btn-primary" >Pontuação Geral</a>
 </p>
 
 <table class="table">
-    <thead>
+    @*<thead>
         <tr>
             <th>
                 <label>Posição</label>
@@ -25,28 +25,30 @@
             </th>
             <th></th>
         </tr>
-    </thead>
+    </thead>*@
     <tbody>
         @{ int i = 0; }
         @foreach (var item in Model)
         {
 
-            <tr>
-                @{
-                    i = i + 1;
-                }
-                <td>
-                    <label>@i</label>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Num)
-                </td>
+        <tr>
+            @{
+                i = i + 1;
+            }
+            <td style="width:30px;">
+                <label>#@i</label>
+            </td>
+            <td style="width:500px;">
+                @Html.DisplayFor(modelItem => item.Num)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.PontuacaoDiaria)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PontuacaoDiaria)
+            
+                <img src="~/Images/coin.png" style="height:35px; width:35px" />
+            </td>
 
-            </tr>
+        </tr>
         }
     </tbody>
 </table>

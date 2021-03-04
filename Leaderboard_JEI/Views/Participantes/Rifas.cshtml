@@ -4,28 +4,53 @@
     ViewData["Title"] = "Rifas";
 }
 
-<h1>Rifas - O preço de cada rifa são de 10K's</h1>
-<form asp-action="Rifas">
+<h1>Rifas - Preço de cada rifa 10K's</h1>
+<form asp-action="Rifas" class="form">
+    <div class="cartao">
+        <h2 style="text-align: left;">Prémio A</h2>
+        <div class="texto">
+            <label style="display:inline-block;">Já comprou </label>
+            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.Rifa1)</h5>
+            <label style="display:inline-block;"> rifas.</label>
+        </div>
+        <input type="text" name="primeiro" placeholder="Número de rifas" class="input-group-text" />
 
-    <h2>Prémio 1</h2>
-    <h3>A</h3>
-    <a>Já comprou @Html.DisplayFor(model => model.Rifa1) rifas. </a>
-    <input type="number" name="primeiro" placeholder="Número de rifas" />
+    </div>
 
-    <h2>Prémio 2</h2>
-    <h3>B</h3>
-    <label>Já comprou @Html.DisplayFor(model => model.Rifa2) rifas. </label>
-    <input type="number" name="segundo" placeholder="Número de rifas" />
+    <div class="cartao">
+        <h2 style="text-align: left;">Prémio B</h2>
+        <div class="texto">
+            <label style="display:inline-block;">Já comprou </label>
+            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.Rifa2)</h5>
+            <label style="display:inline-block;"> rifas.</label>
+        </div>
+        <input type="text" name="segundo" placeholder="Número de rifas" class="input-group-text" />
 
-    <h2>Prémio 3</h2>
-    <h3>C</h3>
-    <label>Já comprou @Html.DisplayFor(model => model.Rifa3) rifas. </label>
-    <input type="number" name="terceiro" placeholder="Número de rifas" />
+    </div>
 
-    <h2>Prémio 4</h2>
-    <h3>D</h3>
-    <label>Já comprou @Html.DisplayFor(model => model.Rifa4) rifas. </label>
-    <input type="number" name="quarto" placeholder="Número de rifas" />
+
+    <div class="cartao">
+        <h2 style="text-align: left;">Prémio C</h2>
+        <div class="texto">
+            <label style="display:inline-block;">Já comprou </label>
+            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.Rifa3)</h5>
+            <label style="display:inline-block;"> rifas.</label>
+        </div>
+        <input type="text" name="terceiro" placeholder="Número de rifas" class="input-group-text" />
+
+    </div>
+
+    <div class="cartao">
+        <h2 style="text-align: left;">Prémio D</h2>
+        <div class="texto">
+            <label style="display:inline-block;">Já comprou </label>
+            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.Rifa4)</h5>
+            <label style="display:inline-block;"> rifas.</label>
+        </div>
+        <input type="text" name="quarto" placeholder="Número de rifas" class="input-group-text" />
+
+    </div>
+    <input type="submit" class="btn btn-primary" value="Comprar" style="align-self:center; width:35%;" />
     @if (ViewBag.Message != null)
     {
         <script type="text/javascript">
@@ -36,6 +61,27 @@
         </script>
 
     }
-    <input type="submit" />
+
 </form>
 
+<style>
+    .cartao {
+        padding: 15px;
+        width: 90%;
+        border: 3px solid #7289da;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        position:relative;
+        
+    }
+    .texto {
+        position: absolute;
+        top:15px;
+        right: 15px;
+    }
+    form {
+        display: flex;
+        flex-direction:column;
+        justify-content: space-around;
+    }
+</style>

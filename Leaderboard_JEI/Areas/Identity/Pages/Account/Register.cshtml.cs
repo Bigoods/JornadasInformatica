@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Leaderboard_JEI.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    [Authorize(Roles ="Admin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -86,7 +86,6 @@ namespace Leaderboard_JEI.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
-
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;

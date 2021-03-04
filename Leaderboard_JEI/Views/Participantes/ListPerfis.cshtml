@@ -14,23 +14,28 @@
                 @Html.DisplayNameFor(model => model.Username)
             </th>
             
-            <th>
+            <th style="width:500px;">
                 <h6>K's</h6>
             </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.Pontos)
-            </td>
-            
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            if (item.Username != "Admin")
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+
+                    <td style="width:500px;">
+                        @Html.DisplayFor(modelItem => item.Pontos)
+                    </td>
+
+                </tr>
+            }
+
+        }
     </tbody>
 </table>
