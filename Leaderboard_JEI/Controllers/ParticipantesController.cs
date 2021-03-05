@@ -99,15 +99,19 @@ namespace Leaderboard_JEI.Controllers
             _context.SaveChanges();
         }
         [AllowAnonymous]
-        public async Task<IActionResult> Lista()
+        public async Task<IActionResult> Lista(string numero)
         {
             GetPontos();
+            if (numero != null)
+                return View(await _context.Participante.OrderByDescending(x => x.PontuacaoDiaria).Where(n => Convert.ToString(n.Num).Contains(numero)).ToListAsync());
             return View(await _context.Participante.OrderByDescending(x=>x.Pontuacao).ToListAsync());
         }
         [AllowAnonymous]
-        public async Task<IActionResult> Listadiaria()
+        public async Task<IActionResult> Listadiaria(string numero)
         {
             GetPontos();
+            if (numero != null)
+                return View(await _context.Participante.OrderByDescending(x => x.PontuacaoDiaria).Where(n => Convert.ToString(n.Num).Contains(numero)).ToListAsync());
             return View(await _context.Participante.OrderByDescending(x => x.PontuacaoDiaria).ToListAsync());
         }
         public IActionResult Rifas()
