@@ -108,7 +108,7 @@ namespace Leaderboard_JEI.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    Perfil newPerfil = new Perfil { Pontos = Input.Pontos, Rifa1 = Input.Rifa1, Rifa2 = Input.Rifa2, Rifa3 = Input.Rifa3, Rifa4 = Input.Rifa4, Username = user.UserName };
+                    Perfil newPerfil = new Perfil { Pontos = Input.Pontos, Username = user.UserName };
                     _dbcontext.Perfils.Add(newPerfil);
                     await _dbcontext.SaveChangesAsync();
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

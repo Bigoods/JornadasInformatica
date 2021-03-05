@@ -15,5 +15,6 @@ namespace Leaderboard_JEI.Data
         }
         public DbSet<Leaderboard_JEI.Models.Participante> Participante { get; set; }
         public DbSet<Perfil> Perfils { get; set; }
+        public DbSet<Rifa> Rifas { get; set; }
     }
 }

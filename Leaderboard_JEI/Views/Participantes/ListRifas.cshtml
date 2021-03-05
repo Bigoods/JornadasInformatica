@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Leaderboard_JEI.Models.Perfil>
+﻿@model IEnumerable<Leaderboard_JEI.ViewModel.LisRifa>
 
 @{
     ViewData["Title"] = "ListRifas";
@@ -14,16 +14,16 @@
                 @Html.DisplayNameFor(model => model.Username)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rifa1)
+                @Html.DisplayNameFor(model => model.NumRifa1)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rifa2)
+                @Html.DisplayNameFor(model => model.NumRifa2)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rifa3)
+                @Html.DisplayNameFor(model => model.NumRifa3)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rifa4)
+                @Html.DisplayNameFor(model => model.NumRifa4)
             </th>
             <th></th>
         </tr>
@@ -38,16 +38,16 @@
                         @Html.DisplayFor(modelItem => item.Username)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Rifa1)
+                        @Html.DisplayFor(modelItem => item.NumRifa1)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Rifa2)
+                        @Html.DisplayFor(modelItem => item.NumRifa2)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Rifa3)
+                        @Html.DisplayFor(modelItem => item.NumRifa3)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Rifa4)
+                        @Html.DisplayFor(modelItem => item.NumRifa4)
                     </td>
                 </tr>
             }

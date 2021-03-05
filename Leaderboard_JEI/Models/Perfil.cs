@@ -11,14 +11,14 @@ namespace Leaderboard_JEI.Models
         public int Id { get; set; }
         [Display(Name = "Pontos")]
         public int Pontos { get; set; } = 0;
-        [Display(Name = "Rifa1")]
-        public int Rifa1 { get; set; } = 0;
-        [Display(Name = "Rifa2")]
-        public int Rifa2 { get; set; } = 0;
-        [Display(Name = "Rifa3")]
-        public int Rifa3 { get; set; } = 0;
-        [Display(Name = "Rifa4")]
-        public int Rifa4 { get; set; } = 0;
+        //[Display(Name = "Rifa1")]
+        //public Rifa Rifa1 { get; set; } 
+        //[Display(Name = "Rifa2")]
+        //public Rifa Rifa2 { get; set; } 
+        //[Display(Name = "Rifa3")]
+        //public Rifa Rifa3 { get; set; } 
+        //[Display(Name = "Rifa4")]
+        //public Rifa Rifa4 { get; set; } 
         public string Username { get; set; }
     }
 }

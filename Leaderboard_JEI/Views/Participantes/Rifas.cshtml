@@ -1,5 +1,5 @@
 ﻿@using System.Security.Claims;
-@model Leaderboard_JEI.Models.Perfil
+@model Leaderboard_JEI.ViewModel.LisRifa
 @{
     ViewData["Title"] = "Rifas";
 }
@@ -10,7 +10,7 @@
         <h2 style="text-align: left;">Prémio A</h2>
         <div class="texto">
             <label style="display:inline-block;">Já comprou </label>
-            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.Rifa1)</h5>
+            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.NumRifa1)</h5>
             <label style="display:inline-block;"> rifas.</label>
         </div>
         <input type="text" name="primeiro" placeholder="Número de rifas" class="input-group-text" />
@@ -21,7 +21,7 @@
         <h2 style="text-align: left;">Prémio B</h2>
         <div class="texto">
             <label style="display:inline-block;">Já comprou </label>
-            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.Rifa2)</h5>
+            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.NumRifa2)</h5>
             <label style="display:inline-block;"> rifas.</label>
         </div>
         <input type="text" name="segundo" placeholder="Número de rifas" class="input-group-text" />
@@ -33,7 +33,7 @@
         <h2 style="text-align: left;">Prémio C</h2>
         <div class="texto">
             <label style="display:inline-block;">Já comprou </label>
-            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.Rifa3)</h5>
+            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.NumRifa3)</h5>
             <label style="display:inline-block;"> rifas.</label>
         </div>
         <input type="text" name="terceiro" placeholder="Número de rifas" class="input-group-text" />
@@ -44,7 +44,7 @@
         <h2 style="text-align: left;">Prémio D</h2>
         <div class="texto">
             <label style="display:inline-block;">Já comprou </label>
-            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.Rifa4)</h5>
+            <h5 style="display:inline-block;">@Html.DisplayFor(model => model.NumRifa4)</h5>
             <label style="display:inline-block;"> rifas.</label>
         </div>
         <input type="text" name="quarto" placeholder="Número de rifas" class="input-group-text" />
@@ -71,17 +71,18 @@
         border: 3px solid #7289da;
         border-radius: 10px;
         margin-bottom: 30px;
-        position:relative;
-        
+        position: relative;
     }
+
     .texto {
         position: absolute;
-        top:15px;
+        top: 15px;
         right: 15px;
     }
+
     form {
         display: flex;
-        flex-direction:column;
+        flex-direction: column;
         justify-content: space-around;
     }
 </style>

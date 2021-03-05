@@ -57,7 +57,12 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Participantes" asp-action="DarPontos">Gerir Pontos</a>
                             }
                         </li>
-
+                        <li class="nav-item">
+                            @if (User.Identity.Name == "Admin")
+                            {
+                                <a class="nav-link text-white" asp-area="" asp-controller="Participantes" asp-action="ListaIdRifa">Sorteio Rifas</a>
+                            }
+                        </li>
 
 
                     </ul>

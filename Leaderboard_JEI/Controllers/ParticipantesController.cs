@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using System.Security.Claims;
-
+using Leaderboard_JEI.ViewModel;
 
 namespace Leaderboard_JEI.Controllers
 {
@@ -59,7 +59,7 @@ namespace Leaderboard_JEI.Controllers
                 file.CopyTo(fs);
                 fs.Close();
                 popular();
-                
+
             }
             return RedirectToAction("Lista");
         }
@@ -81,8 +81,8 @@ namespace Leaderboard_JEI.Controllers
                             dt.Num = Convert.ToInt32(column);
                         if (j == 1)
                             dt.Pontuacao = Convert.ToInt32(column);
-                        if (DateTime.Now.Day==9)
-                            if(j==3)
+                        if (DateTime.Now.Day == 9)
+                            if (j == 3)
                                 dt.PontuacaoDiaria = Convert.ToInt32(column);
                         if (DateTime.Now.Day == 10)
                             if (j == 5)
@@ -103,26 +103,40 @@ namespace Leaderboard_JEI.Controllers
         {
             GetPontos();
             if (numero != null)
-                return View(await _context.Participante.OrderByDescending(x => x.PontuacaoDiaria).Where(n => Convert.ToString(n.Num).Contains(numero)).ToListAsync());
-            return View(await _context.Participante.OrderByDescending(x=>x.Pontuacao).ToListAsync());
+                return View(await _context.Participante.Where(n => Convert.ToString(n.Num).Contains(numero)).OrderByDescending(x => x.Pontuacao).ToListAsync());
+            return View(await _context.Participante.OrderByDescending(x => x.Pontuacao).ToListAsync());
         }
         [AllowAnonymous]
         public async Task<IActionResult> Listadiaria(string numero)
         {
             GetPontos();
             if (numero != null)
-                return View(await _context.Participante.OrderByDescending(x => x.PontuacaoDiaria).Where(n => Convert.ToString(n.Num).Contains(numero)).ToListAsync());
+                return View(await _context.Participante.Where(n => Convert.ToString(n.Num).Contains(numero)).OrderByDescending(x => x.PontuacaoDiaria).ToListAsync());
             return View(await _context.Participante.OrderByDescending(x => x.PontuacaoDiaria).ToListAsync());
         }
         public IActionResult Rifas()
         {
             GetPontos();
-            return View(_context.Perfils.FirstOrDefault(x => x.Username == User.Identity.Name));
+
+            var perfil = _context.Perfils.FirstOrDefault(x => x.Username == User.Identity.Name);
+
+            LisRifa c = new LisRifa();
+            c.Username = perfil.Username;
+            c.NumRifa1 = _context.Rifas.Where(x => x.TipoRifa == 1 && x.UserName == perfil.Username).Count();
+            c.NumRifa2 = _context.Rifas.Where(x => x.TipoRifa == 2 && x.UserName == perfil.Username).Count();
+            c.NumRifa3 = _context.Rifas.Where(x => x.TipoRifa == 3 && x.UserName == perfil.Username).Count();
+            c.NumRifa4 = _context.Rifas.Where(x => x.TipoRifa == 4 && x.UserName == perfil.Username).Count();
+
+
+
+            return View(c);
         }
         [HttpPost]
         public IActionResult Rifas(int primeiro, int segundo, int terceiro, int quarto)
         {
             var perfil = _context.Perfils.FirstOrDefault(x => x.Username == User.Identity.Name);
+
+            LisRifa c = new LisRifa();
             if (perfil != null)
             {
                 int soma = (primeiro + segundo + terceiro + quarto) * 10;
@@ -132,29 +146,72 @@ namespace Leaderboard_JEI.Controllers
                     perfil.Pontos = perfil.Pontos - segundo * 10;
                     perfil.Pontos = perfil.Pontos - terceiro * 10;
                     perfil.Pontos = perfil.Pontos - quarto * 10;
-                    perfil.Rifa1 = perfil.Rifa1 + primeiro;
-                    perfil.Rifa2 = perfil.Rifa2 + segundo;
-                    perfil.Rifa3 = perfil.Rifa3 + terceiro;
-                    perfil.Rifa4 = perfil.Rifa4 + quarto;
-                    _context.Perfils.Update(perfil);
-                    _context.SaveChanges();
+
+                    for (int i = 0; i < primeiro; i++)
+                    {
+                        Rifa newRifa = new Rifa();
+                        newRifa.NumRifa = _context.Rifas.Where(x => x.TipoRifa == 1).Count() + 1;
+                        newRifa.UserName = User.Identity.Name;
+                        newRifa.TipoRifa = 1;
+
+                        _context.Rifas.Add(newRifa);
+                        _context.SaveChanges();
+                    }
+                    for (int i = 0; i < segundo; i++)
+                    {
+                        Rifa newRifa = new Rifa();
+                        newRifa.NumRifa = _context.Rifas.Where(x => x.TipoRifa == 2).Count() + 1;
+                        newRifa.UserName = User.Identity.Name;
+                        newRifa.TipoRifa = 2;
+
+                        _context.Rifas.Add(newRifa);
+                        _context.SaveChanges();
+                    }
+                    for (int i = 0; i < terceiro; i++)
+                    {
+                        Rifa newRifa = new Rifa();
+                        newRifa.NumRifa = _context.Rifas.Where(x => x.TipoRifa == 3).Count() + 1;
+                        newRifa.UserName = User.Identity.Name;
+                        newRifa.TipoRifa = 3;
+
+                        _context.Rifas.Add(newRifa);
+                        _context.SaveChanges();
+                    }
+                    for (int i = 0; i < quarto; i++)
+                    {
+                        Rifa newRifa = new Rifa();
+                        newRifa.NumRifa = _context.Rifas.Where(x => x.TipoRifa == 4).Count() + 1;
+                        newRifa.UserName = User.Identity.Name;
+                        newRifa.TipoRifa = 4;
+
+                        _context.Rifas.Add(newRifa);
+                        _context.SaveChanges();
+                    }
+
+                    c.Username = perfil.Username;
+                    c.NumRifa1 = _context.Rifas.Where(x => x.TipoRifa == 1 && x.UserName == perfil.Username).Count();
+                    c.NumRifa2 = _context.Rifas.Where(x => x.TipoRifa == 2 && x.UserName == perfil.Username).Count();
+                    c.NumRifa3 = _context.Rifas.Where(x => x.TipoRifa == 3 && x.UserName == perfil.Username).Count();
+                    c.NumRifa4 = _context.Rifas.Where(x => x.TipoRifa == 4 && x.UserName == perfil.Username).Count();
+
+
                 }
                 else
                     ViewBag.Message = "Erro";
             }
             GetPontos();
-            return View(perfil);
+            return View(c);
         }
 
         public void GetPontos()
         {
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 var perfil = _context.Perfils.FirstOrDefault(x => x.Username == User.Identity.Name);
                 ViewBag.Pontos = perfil.Pontos;
             }
         }
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DarPontos()
         {
             GetPontos();
@@ -171,17 +228,17 @@ namespace Leaderboard_JEI.Controllers
                 ViewBag.Message = "Erro";
                 return View();
             }
-                
+
             else
             {
                 if (Add > 0)
                     perfil.Pontos = perfil.Pontos + Add;
-                if(Remove > 0 && perfil.Pontos-Remove >= 0)
+                if (Remove > 0 && perfil.Pontos - Remove >= 0)
                     perfil.Pontos = perfil.Pontos - Remove;
                 _context.Perfils.Update(perfil);
                 _context.SaveChanges();
             }
-            return RedirectToAction("Details", new { Numero=perfil.Username });
+            return RedirectToAction("Details", new { Numero = perfil.Username });
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Details(string Numero)
@@ -199,7 +256,34 @@ namespace Leaderboard_JEI.Controllers
         public IActionResult ListRifas()
         {
             GetPontos();
-            return View(_context.Perfils.OrderBy(x=>x.Username).ToList());
+
+            List<LisRifa> listFinal = new List<LisRifa>();
+
+
+
+
+            foreach (var item in _context.Perfils)
+            {
+
+                LisRifa c = new LisRifa();
+
+                c.NumRifa1 = _context.Rifas.Where(x => x.TipoRifa == 1 && x.UserName == item.Username).Count();
+                c.NumRifa2 = _context.Rifas.Where(x => x.TipoRifa == 2 && x.UserName == item.Username).Count();
+                c.NumRifa3 = _context.Rifas.Where(x => x.TipoRifa == 3 && x.UserName == item.Username).Count();
+                c.NumRifa4 = _context.Rifas.Where(x => x.TipoRifa == 4 && x.UserName == item.Username).Count();
+                c.Username = item.Username;
+
+                listFinal.Add(c);
+
+            }
+
+
+            return View(listFinal);
+        }
+        [Authorize(Roles = "Admin")]
+        public IActionResult ListaIdRifa()
+        {
+            return View(_context.Rifas.OrderBy(x=>x.TipoRifa).ToList());
         }
 
         /*public async Task<IActionResult> UploadCSVAsync(List<IFormFile> arquivos)
