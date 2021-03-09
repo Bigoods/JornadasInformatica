@@ -39,7 +39,8 @@ namespace Leaderboard_JEI
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-           // services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+
+            //services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

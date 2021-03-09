@@ -35,25 +35,27 @@
         @{ int i = 0; }
         @foreach (var item in Model)
         {
+            @if (item.Num < 100000 && item.Num > 45000)
+            {
+                <tr>
+                    @{
+                        i = i + 1;
+                    }
+                    <td style="width:30px;">
+                        <label>#@i</label>
+                    </td>
+                    <td style="width:500px;">
+                        @Html.DisplayFor(modelItem => item.Num)
+                    </td>
 
-        <tr>
-            @{
-                i = i + 1;
-            }
-            <td style="width:30px;">
-                <label>#@i</label>
-            </td>
-            <td style="width:500px;">
-                @Html.DisplayFor(modelItem => item.Num)
-            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PontuacaoDiaria)
 
-            <td>
-                @Html.DisplayFor(modelItem => item.PontuacaoDiaria)
-            
-                <img src="~/Images/coin.png" style="height:35px; width:35px" />
-            </td>
+                        <img src="~/Images/coin.png" style="height:35px; width:35px" />
+                    </td>
 
-        </tr>
-        }
-    </tbody>
+                </tr>
+             }
+         }
+        </tbody>
 </table>

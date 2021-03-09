@@ -53,20 +53,26 @@ namespace Leaderboard_JEI.Controllers
         {
             if (ModelState.IsValid)
             {
+                string delete = Path.Combine(_appEnvironment.ContentRootPath, "wwwroot/Ficheiros/", file.FileName);
+                if (System.IO.File.Exists(delete))
+                {
+                    System.IO.File.Delete(delete);
+                }
                 _context.Participante.RemoveRange(_context.Participante.ToList());
+                _context.SaveChanges();
                 string destination = Path.Combine(_appEnvironment.ContentRootPath, "wwwroot/Ficheiros/", Path.GetFileName(file.FileName));
                 FileStream fs = new FileStream(destination, FileMode.Create);
                 file.CopyTo(fs);
                 fs.Close();
-                popular();
+                popular(file.FileName);
 
             }
             return RedirectToAction("Lista");
         }
 
-        public void popular()
+        public void popular(string file)
         {
-            string csvPath = Path.Combine(_appEnvironment.ContentRootPath, "wwwroot/Ficheiros/", "Jornadas - Total Final.csv");
+            string csvPath = Path.Combine(_appEnvironment.ContentRootPath, "wwwroot/Ficheiros/", file);
             string csvData = System.IO.File.ReadAllText(csvPath);
             int i = 0, j = 0;
             foreach (string row in csvData.Split("\n"))
@@ -259,10 +265,10 @@ namespace Leaderboard_JEI.Controllers
 
             List<LisRifa> listFinal = new List<LisRifa>();
 
+            List<Perfil> perfil = _context.Perfils.ToList();
 
 
-
-            foreach (var item in _context.Perfils)
+            foreach (var item in perfil)
             {
 
                 LisRifa c = new LisRifa();

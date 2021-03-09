@@ -32,25 +32,28 @@
         </tr>
     </thead>*@
     <tbody>
-        @{ int i = 0; } 
-@foreach (var item in Model)
-{
-        <tr>
-            @{
-                i = i + 1;
-            }
-            <td style="width:30px;">
-                <label>#@i</label>
-            </td>
-            <td style="width:500px;">
-                @Html.DisplayFor(modelItem => item.Num)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pontuacao)
+        @{ int i = 0; }
+        @foreach (var item in Model)
+        {
             
-                <img src="~/Images/coin.png" style="height:35px; width:35px"/>
-            </td>
-        </tr>
-}
+            <tr>
+                @{
+                    i = i + 1;
+                }
+                <td style="width:30px;">
+                    <label>#@i</label>
+                </td>
+                <td style="width:500px;">
+                    @Html.DisplayFor(modelItem => item.Num)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pontuacao)
+
+                    <img src="~/Images/coin.png" style="height:35px; width:35px" />
+                </td>
+            </tr>
+            
+
+        }
     </tbody>
 </table>
